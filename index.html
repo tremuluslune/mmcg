@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Title of the document</title>
+</head>
+
+<body>
+    <div id="content">
+    </div>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="jquery.xdomainajax.js"></script>
+<script> 
+    var imgArr = new Array();
+    $('#container').load('http://google.com'); // SERIOUSLY! 
+    
+    var getImgUrls = function (index) {
+        $.ajax({
+            url: 'http://18h.mm-cg.com/18H_' + index + '.html',
+            type: 'GET',
+            success: function(res) {
+                var resTextArr = res.responseText.split("\n");
+                $.grep(resTextArr, function(item) {
+                    var re = new RegExp("Large_cgurl\\[[0-9]*\\] = ");
+                    // console.log(re.test(item));
+                    if (re.test(item)) {
+                        var url = item.replace(re, "").replace(/"/, "").replace(/^[ \t]*/,"");
+                        imgArr.push(url);
+                    }
+                });
+                ready(imgArr);
+
+            }
+        });
+    } 
+    var ready = function(urls) {
+        for (var i = 0; i < urls.length; i++) {
+            $('#content').append('<img src="' + urls[i] + '">').fadeIn();
+        }
+    }
+
+    getImgUrls(location.hash.replace("#", ""));
+
+</script>
+</body>
+
+</html>
