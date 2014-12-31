@@ -10,10 +10,7 @@
     "content_scripts": [
         {
             "matches": [
-                "http://18h.mm-cg.com/*"
-            ],
-            "exclude_matches": [
-                "http://18h.mm-cg.com/"
+                "http://18h.mm-cg.com/18H_*"
             ],
             "css": [
                 "css/mmcg.css",
