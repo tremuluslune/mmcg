@@ -1,0 +1,28 @@
+{
+    "manifest_version": 2,
+
+    "name": "mmcg",
+    "version": "0.1",
+    "description": "mmcg test",
+    "permissions": [
+        "http://18h.mm-cg.com"
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "http://18h.mm-cg.com/*"
+            ],
+            "exclude_matches": [
+                "http://18h.mm-cg.com/"
+            ],
+            "css": [
+                "css/mmcg.css",
+                "css/normalize.css"
+            ],
+            "js": [
+                "js/mmcg.js"
+            ],
+            "run_at": "document_end"
+        }
+    ]
+}
